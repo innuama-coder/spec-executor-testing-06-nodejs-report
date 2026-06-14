@@ -1,0 +1,20 @@
+version: "2.0"
+name: "nodejs-report-summary"
+repo:
+  url: "https://github.com/innuama-coder/spec-executor-testing-06-nodejs-report.git"
+  branch: "main"
+task_dir: "tasks/development"
+executor: "codex"
+deliverables:
+  - path: "bin/report-summary.mjs"
+    verify: "node test/self-test.mjs && node test/acceptance.mjs"
+  - path: "test/self-test.mjs"
+    verify: "node test/self-test.mjs && node test/acceptance.mjs"
+  - path: "docs/DELIVERY.md"
+    verify: "test -s docs/DELIVERY.md && grep -q \"^执行结果：通过$\" docs/DELIVERY.md"
+execution:
+  poll_interval_sec: 2
+  idle_timeout_sec: 60
+  max_duration_min: 10
+  max_nudge_count: 3
+  max_consecutive_escalate: 2
