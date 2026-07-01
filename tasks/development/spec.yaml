@@ -1,10 +1,82 @@
-version: "2.0"
+version: "2.3"
 name: "nodejs-report-summary"
 repo:
   url: "https://github.com/innuama-coder/spec-executor-testing-06-nodejs-report.git"
   branch: "main"
 task_dir: "tasks/development"
 executor: "codex"
+execution:
+  poll_interval_sec: 2
+  idle_timeout_sec: 90
+  max_duration_min: 15
+  max_nudge_count: 3
+  max_consecutive_escalate: 2
+  env:
+    file: "ENV"
+    required: true
+    privacy: "redacted"
+  agent:
+    id: "nodejs-report-agent"
+    name: "nodejs-report-agent"
+    role: "实现 Node.js 报告摘要命令并维护自测与验收脚本。"
+    model:
+      preference: "default"
+    instructions:
+      - "ENV 隐私 sentinel、Codex Agent、默认输出脱敏。"
+      - "严格遵守任务包中的 PROMPT、AGENTS、CLAUDE 与 docs 上下文。"
+      - "ENV 仅用于进程环境注入，不得作为上下文文件读取或在默认输出中泄漏变量值。"
+      - "若存在 review items，必须在同一 JOB 内完成修复、验证和交付说明更新。"
+    context:
+      files:
+        - "PROMPT.md"
+        - "AGENTS.md"
+        - "CLAUDE.md"
+      exclude:
+        - "ENV"
+    tools:
+      allow:
+        - "shell"
+        - "apply_patch"
+      deny:
+        - "network"
+    permissions:
+      filesystem: "workspace-write"
+      network: "deny"
+      approval: "on-request"
+  review:
+    max_iterations: 2
+    items:
+      - id: "REV-REPORT-001"
+        source: "external-review"
+        severity: "must"
+        target: "docs/DELIVERY.md"
+        description: "交付说明不得记录 ENV 中的 token 值。"
+        expected_fix: "只记录变量名和注入状态，不记录 token 明文。"
+        evidence_refs:
+          - "PROMPT.md"
+        acceptance:
+          command: "grep -q \"执行结果：通过\" docs/DELIVERY.md"
+  lifecycle:
+    resume:
+      require_same_job: true
+    monitoring:
+      busy_side_effect: "observe_only"
+      source_degraded_policy: "bounded_failure"
+      screen_capture_semantic_fallback: false
+    capture:
+      default_raw_output: false
+      failure_evidence: true
+verification:
+  pass_threshold: 1
+  commands:
+    - "node test/self-test.mjs"
+    - "node test/acceptance.mjs"
+    - "test -s docs/DELIVERY.md && grep -q \"^执行结果：通过$\" docs/DELIVERY.md"
+reporting:
+  format: "markdown"
+  include_evidence_refs: true
+  redact_env_values: true
+  include_handoff: true
 deliverables:
   - path: "bin/report-summary.mjs"
     verify: "node test/self-test.mjs && node test/acceptance.mjs"
@@ -12,9 +84,3 @@ deliverables:
     verify: "node test/self-test.mjs && node test/acceptance.mjs"
   - path: "docs/DELIVERY.md"
     verify: "test -s docs/DELIVERY.md && grep -q \"^执行结果：通过$\" docs/DELIVERY.md"
-execution:
-  poll_interval_sec: 2
-  idle_timeout_sec: 60
-  max_duration_min: 10
-  max_nudge_count: 3
-  max_consecutive_escalate: 2
