@@ -1,0 +1,121 @@
+{
+  "deliverables": {
+    "aggregate": {
+      "failed": 0,
+      "passed": 3,
+      "total": 3,
+      "total_duration_ms": 1090,
+      "verify_executed": 3,
+      "verify_passed": 3,
+      "warning_items": 0
+    },
+    "finished_at": "2026-07-02T02:33:32.674967+00:00",
+    "items": [
+      {
+        "duration_ms": 526,
+        "existence": "present_file",
+        "existence_detail": null,
+        "failure_detail": null,
+        "failure_reason": null,
+        "passed": true,
+        "path": "bin/report-summary.mjs",
+        "verify_command": "node test/self-test.mjs && node test/acceptance.mjs",
+        "verify_duration_ms": 526,
+        "verify_exit_code": 0,
+        "verify_signal": null,
+        "verify_stderr_tail": "",
+        "verify_stdout_tail": "",
+        "verify_timed_out": false,
+        "warnings": []
+      },
+      {
+        "duration_ms": 554,
+        "existence": "present_file",
+        "existence_detail": null,
+        "failure_detail": null,
+        "failure_reason": null,
+        "passed": true,
+        "path": "test/self-test.mjs",
+        "verify_command": "node test/self-test.mjs && node test/acceptance.mjs",
+        "verify_duration_ms": 554,
+        "verify_exit_code": 0,
+        "verify_signal": null,
+        "verify_stderr_tail": "",
+        "verify_stdout_tail": "",
+        "verify_timed_out": false,
+        "warnings": []
+      },
+      {
+        "duration_ms": 8,
+        "existence": "present_file",
+        "existence_detail": null,
+        "failure_detail": null,
+        "failure_reason": null,
+        "passed": true,
+        "path": "docs/DELIVERY.md",
+        "verify_command": "test -s docs/DELIVERY.md && grep -q \"^执行结果：通过$\" docs/DELIVERY.md",
+        "verify_duration_ms": 8,
+        "verify_exit_code": 0,
+        "verify_signal": null,
+        "verify_stderr_tail": "",
+        "verify_stdout_tail": "",
+        "verify_timed_out": false,
+        "warnings": []
+      }
+    ],
+    "not_run_reason": null,
+    "started_at": "2026-07-02T02:33:31.584526+00:00",
+    "verification": "ran"
+  },
+  "generated_at": "2026-07-02T02:33:31.576517+00:00",
+  "merging": {
+    "attempted": false,
+    "base_branch": null,
+    "conflict": null,
+    "merge_commit_sha": null,
+    "merged_at": null,
+    "push_detail": null,
+    "push_status": "not_attempted",
+    "pushed": false,
+    "result": "skipped",
+    "skip_reason": "skipped",
+    "source_branch": "spec-exec/nodejs-report-summary-A7FKJR"
+  },
+  "metadata": {
+    "duration_ms": 480966,
+    "executor": "codex",
+    "finished_at": "2026-07-02T02:33:31.576517+00:00",
+    "log_dir": "/Users/royzuo/spec-e2e-v23/logs-nodejs/nodejs-report-summary-A7FKJR",
+    "mode": "worktree",
+    "repo_branch_base": "main",
+    "repo_branch_worktree": "spec-exec/nodejs-report-summary-A7FKJR",
+    "repo_url": "https://github.com/innuama-coder/spec-executor-testing-06-nodejs-report.git",
+    "session_id": "nodejs-report-summary-A7FKJR",
+    "started_at": "2026-07-02T02:25:30.610353+00:00",
+    "task_name": "nodejs-report-summary",
+    "worktree_path": "/Users/royzuo/spec-e2e-v23/.spec-executor-worktrees/nodejs-report-summary-A7FKJR"
+  },
+  "monitoring": {
+    "consecutive_escalate": 0,
+    "decision_done": 2,
+    "decision_escalate_normalized": 0,
+    "decision_fallback_used": 0,
+    "decision_nudge": 8,
+    "decision_timeout": 0,
+    "decision_total": 10,
+    "idle_timeout_hits": 10,
+    "last_decision_action": "done",
+    "last_decision_text": "DELIVERY.md fixed per REV-REPORT-001: ENV token removed, pass marker present",
+    "monitoring_finished_at": "2026-07-02T02:33:31.576517+00:00",
+    "monitoring_started_at": "2026-07-02T02:32:45.949821+00:00",
+    "nudge_count": 8,
+    "poll_count": 47
+  },
+  "schema_version": "spec-executor-report/2.0",
+  "spec_executor_version": "2.2.7",
+  "status": {
+    "failure_category": null,
+    "failure_detail": null,
+    "result": "passed"
+  }
+}
