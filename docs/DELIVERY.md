@@ -21,11 +21,13 @@ node test/acceptance.mjs
 
 ## 执行记录
 
-实现摘要：待填写
+实现摘要：实现 Node.js 报告摘要 CLI，支持 JSON 文件输入、`--self-test`、稳定 Markdown 摘要输出和非法输入错误处理；补充任务级自测覆盖正常摘要、自测入口和缺失文件错误。
 
-验证命令：待填写
+验证命令：`npm test`；`node test/self-test.mjs`；`node test/acceptance.mjs`；`test -s docs/DELIVERY.md && grep -q "^执行结果：通过$" docs/DELIVERY.md`
 
-执行结果：待填写
+ENV 注入状态：已注入；token 变量名：按任务环境配置；token 明文：未记录。
+
+执行结果：通过
 
 ## 通过标准
 
